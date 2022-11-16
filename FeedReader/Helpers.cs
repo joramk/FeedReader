@@ -23,12 +23,20 @@
 
         // The HttpClient instance must be a static field
         // https://aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/
-        private static readonly HttpClient _httpClient = new HttpClient(
+        private static HttpClient _httpClient = new HttpClient(
             new HttpClientHandler
             {
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
             }
         );
+
+        /// <summary>
+        /// Set the HttpClient used for feed downloads
+        /// </summary>
+        public static void SetHttpClient(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
 
         /// <summary>
         /// Download the content from an url
